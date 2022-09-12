@@ -1,8 +1,8 @@
 '''
 - [x] keys into config
 - [x] clean code
-- [ ] create file for adding to sheets
-- [ ] get transactions and add  them to csv as pandas df
+- [x] create file for adding to sheets
+- [ ] get transactions and add them to csv as pandas df
 - [ ] from json response take last entry and check if it is already in csv if not add it 
 - [ ] repeat as long as there are new entries
 - [ ] create google sheets
