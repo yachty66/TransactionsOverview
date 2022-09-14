@@ -1,15 +1,3 @@
-'''
-- [x] keys into config
-- [x] clean code
-- [x] create file for adding to sheets
-- [ ] get transactions and add them to csv as pandas df
-- [ ] from json response take last entry and check if it is already in csv if not add it 
-- [ ] repeat as long as there are new entries
-- [ ] create google sheets
-- [ ] add all new entries to google sheet
-- [ ] create cronjob for every day 00:00
-- [ ] clean code
-'''
 import requests
 import sys
 sys.path.append("/Users/maxhager/Projects2022/TransactionsOverview")
@@ -92,7 +80,7 @@ def getTransactions():
 
 if __name__ == '__main__':
     #print(getToken())
-    # print(chooseBank())
+    #print(chooseBank())
     #print(buildLink())
     #print(listAccounts())
     getTransactions()
