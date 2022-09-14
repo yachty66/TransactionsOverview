@@ -9,17 +9,14 @@
 - [ ] add all new entries to google sheet
 - [ ] create cronjob for every day 00:00
 - [ ] clean code
-
- 
-
 '''
 import requests
+import sys
+sys.path.append("/Users/maxhager/Projects2022/TransactionsOverview")
 import config
 import json
 
 # convert curl to python with https://curlconverter.com/
-
-
 def getToken():
     headers = {
         'accept': 'application/json',
@@ -88,15 +85,14 @@ def getTransactions():
         'Authorization': config.accessToken
     }
 
-    response = requests.get("https://ob.nordigen.com/api/v2/accounts/" +
-                            config.account + "/transactions/", headers=headers)
-    with open('transactions.json', 'w') as outfile:
+    response = requests.get("https://ob.nordigen.com/api/v2/accounts/"+ config.account +"/transactions/", headers=headers)
+    with open('/Users/maxhager/Projects2022/TransactionsOverview/transactions.json', 'w') as outfile:
         json.dump(response.json(), outfile)
 
 
 if __name__ == '__main__':
-    # print(getToken())
+    #print(getToken())
     # print(chooseBank())
-    # print(buildLink())
-    # print(listAccounts())
+    #print(buildLink())
+    #print(listAccounts())
     getTransactions()
