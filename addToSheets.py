@@ -87,7 +87,6 @@ def createCsv():
     createCsv.to_csv(
         '/Users/maxhager/Projects2022/TransactionsOverview/transactions.csv', index=False)
 
-
 if __name__ == "__main__":
     addTransactionsToCsv()
     addToSheets()

@@ -1,25 +1,37 @@
+import json
+
+from git import refresh
+import config
 import requests
 import sys
 sys.path.append("/Users/maxhager/Projects2022/TransactionsOverview")
-import config
-import json
 
 # convert curl to python with https://curlconverter.com/
+
+#get a token
 def getToken():
     headers = {
         'accept': 'application/json',
     }
-
     json_data = {
         'secret_id': config.secretId,
         'secret_key': config.secretKey
     }
-
     response = requests.post(
         'https://ob.nordigen.com/api/v2/token/new/', headers=headers, json=json_data)
-
     return response.json()
 
+def refreshToken():
+    headers = {
+    'accept': 'application/json',
+    }
+
+    json_data = {
+    'refresh': config.refreshToken,
+    }
+
+    response = requests.post('https://ob.nordigen.com/api/v2/token/refresh/', headers=headers, json=json_data)
+    print(response.json())
 
 def chooseBank():
     headers = {
@@ -36,6 +48,19 @@ def chooseBank():
         if bank['name'] == 'N26 Bank':
             id = bank['id']
     return id
+
+
+def userAgreement():
+    headers = {
+        'accept': 'application/json',
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ACCESS_TOKEN',
+    }
+
+    data = '{"institution_id": "N26_NTSBDEB1",\n       "max_historical_days": "90",\n       "access_valid_for_days": "360",}'
+
+    response = requests.post(
+        'https://ob.nordigen.com/api/v2/agreements/enduser/', headers=headers, data=data)
 
 
 def buildLink():
@@ -73,14 +98,20 @@ def getTransactions():
         'Authorization': config.accessToken
     }
 
-    response = requests.get("https://ob.nordigen.com/api/v2/accounts/"+ config.account +"/transactions/", headers=headers)
+    response = requests.get("https://ob.nordigen.com/api/v2/accounts/" +
+                            config.account + "/transactions/", headers=headers)
     with open('/Users/maxhager/Projects2022/TransactionsOverview/transactions.json', 'w') as outfile:
         json.dump(response.json(), outfile)
+    print(response.json())
 
 
 if __name__ == '__main__':
     #print(getToken())
+    #print(refreshToken())
     #print(chooseBank())
     #print(buildLink())
-    #print(listAccounts())
+    #print(listAccounts())        
+    #write into test.txt
     getTransactions()
+    
+
