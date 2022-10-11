@@ -58,7 +58,6 @@ def addTransactionsToCsv():
     df.to_csv(
         '/Users/maxhager/Projects2022/TransactionsOverview/transactions.csv', index=False)
 
-
 def addToSheets():
     if sh.get_all_values() == []:
         header = pd.read_csv(
@@ -74,7 +73,6 @@ def addToSheets():
         '/Users/maxhager/Projects2022/TransactionsOverview/transactions.csv', nrows=0)
     remove.to_csv(
         '/Users/maxhager/Projects2022/TransactionsOverview/transactions.csv', index=False)
-
 
 def createCsv():
     createCsv = pd.DataFrame(columns=getAllKeys())

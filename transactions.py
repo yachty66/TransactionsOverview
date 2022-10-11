@@ -25,13 +25,13 @@ def refreshToken():
     headers = {
     'accept': 'application/json',
     }
-
     json_data = {
     'refresh': config.refreshToken,
     }
-
     response = requests.post('https://ob.nordigen.com/api/v2/token/refresh/', headers=headers, json=json_data)
-    print(response.json())
+    token = response.json().get('access')
+    with open('/Users/maxhager/Projects2022/TransactionsOverview/token.txt', 'w') as outfile:
+        outfile.write(token)
 
 def chooseBank():
     headers = {
@@ -48,7 +48,6 @@ def chooseBank():
         if bank['name'] == 'N26 Bank':
             id = bank['id']
     return id
-
 
 def userAgreement():
     headers = {
@@ -102,16 +101,14 @@ def getTransactions():
                             config.account + "/transactions/", headers=headers)
     with open('/Users/maxhager/Projects2022/TransactionsOverview/transactions.json', 'w') as outfile:
         json.dump(response.json(), outfile)
-    print(response.json())
 
 
 if __name__ == '__main__':
     #print(getToken())
-    #print(refreshToken())
+    refreshToken()
     #print(chooseBank())
     #print(buildLink())
     #print(listAccounts())        
-    #write into test.txt
     getTransactions()
     
 
